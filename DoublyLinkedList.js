@@ -105,12 +105,23 @@ class DoublyLinkedList {
           return undefined;   
       }
 
-      
-      let currentNode = this.head;
+      const half = Math.floor(this.length/2);
+      // 0 1 2 3 4 5 6
 
-      // -1 because we are starting at the head
-      for (let i = 0; i <= index - 1; i++) {
-          currentNode = currentNode.next;
+      // if the index is > than the half value, start from the tail
+      // if the index is < than the half value, start from the head
+      const isGreaterThanHalf = index > half;
+          
+      let currentNode = isGreaterThanHalf ? this.tail : this.head;
+
+      if (isGreaterThanHalf) {
+         for (let i = 0; i < this.length - index - 1; i++) {
+              currentNode = currentNode.prev;
+          }
+      } else {
+          for (let i = 0; i < index - 1; i++) {
+              currentNode = currentNode.next;
+          }
       }
 
       return currentNode;
@@ -173,3 +184,7 @@ const list = new DoublyLinkedList();
 list.push("zero");
 list.push("one");
 list.push("three");
+list.push("four");
+list.push("five");
+list.push("six");
+list.push("seven");
